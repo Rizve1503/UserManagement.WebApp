@@ -1,0 +1,94 @@
+﻿@model UserManagement.WebApp.Models.UserTableViewModel
+@{
+    ViewData["Title"] = "User Management";
+}
+<link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
+
+<div class="container mt-4">
+    <h2 class="mb-4">User Management Dashboard</h2>
+
+     <partial name="_StatusMessage" />
+ 
+    <form asp-controller="Users" method="post">
+        @Html.AntiForgeryToken()
+
+        <!-- Toolbar -->
+        <div class="card p-3 mb-3">
+            <div class="toolbar-actions">
+                @* ✅ ADDED CLASS FOR RESPONSIVENESS *@
+                <button type="submit" asp-action="Block" class="btn btn-warning">
+                    <i class="bi bi-lock-fill"></i> Block
+                </button>
+                <button type="submit" asp-action="Unblock" class="btn btn-success" data-bs-toggle="tooltip" data-bs-title="Unblock selected users">
+                    <i class="bi bi-unlock-fill"></i>
+                </button>
+                <button type="submit" asp-action="Delete" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-title="Delete selected users">
+                    <i class="bi bi-trash-fill"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- User Table -->
+        <div class="table-responsive">
+            <table class="table table-striped table-hover responsive-table">
+                @* ✅ ADDED CLASS FOR RESPONSIVENESS *@
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col" class="text-center">
+                            <input class="form-check-input" type="checkbox" id="selectAllCheckbox" title="Select All">
+                        </th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Last Login</th>
+                        <th scope="col">Registered</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.Users)
+                    {
+                        <tr>
+                            <!-- ✅ ADDED data-label ATTRIBUTES and a class for the checkbox cell -->
+                            <td class="checkbox-cell">
+                                <input class="form-check-input user-checkbox" type="checkbox" name="userIds" value="@user.Id">
+                            </td>
+                            <td data-label="Name">@user.Name</td>
+                            <td data-label="Email">@user.Email</td>
+                            <td data-label="Last Login">@user.LastLoginTimeUtc.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                            <td data-label="Registered">@user.RegistrationTimeUtc.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                            <td data-label="Status">
+                                @if (user.IsBlocked)
+                                {
+                                    <span class="badge bg-danger">Blocked</span>
+                                }
+                                else
+                                {
+
+                                    <span class="badge bg-success">Active</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <!-- The JavaScript for checkbox logic remains the same -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+            const userCheckboxes = document.querySelectorAll('.user-checkbox');
+            const totalUserCheckboxes = userCheckboxes.length;
+            function updateSelectAllState() {
+                const checkedCount = document.querySelectorAll('.user-checkbox:checked').length;
+                selectAllCheckbox.checked = checkedCount > 0 && checkedCount === totalUserCheckboxes;
+            }
+            selectAllCheckbox.addEventListener('change', () => userCheckboxes.forEach(c => c.checked = selectAllCheckbox.checked));
+            userCheckboxes.forEach(c => c.addEventListener('change', updateSelectAllState));
+            updateSelectAllState();
+        });
+    </script>
+}

@@ -1,0 +1,12 @@
+﻿@if (TempData["StatusMessage"] != null)
+{
+    var message = TempData["StatusMessage"].ToString().Split(':', 2);
+    var messageType = message[0];
+    var messageText = message[1];
+    var alertClass = $"alert-{messageType}";
+
+    <div id="status-message-alert" class="alert @alertClass alert-dismissible fade show" role="alert">
+        @messageText
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}

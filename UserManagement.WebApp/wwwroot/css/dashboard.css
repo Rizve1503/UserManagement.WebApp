@@ -1,0 +1,68 @@
+﻿/* File: wwwroot/css/dashboard.css */
+
+/* --- Toolbar Responsiveness --- */
+.toolbar-actions {
+    display: flex;
+    flex-wrap: wrap; /* Allows buttons to wrap onto the next line on small screens */
+    gap: 0.5rem; /* Adds a small space between wrapped buttons */
+}
+
+
+/* --- Table to Card Transformation --- */
+/* This media query activates for screens 768px wide or smaller */
+@media (max-width: 768px) {
+    .responsive-table thead {
+        /* 1. Hide the table headers completely */
+        display: none;
+    }
+
+    .responsive-table tbody,
+    .responsive-table tr,
+    .responsive-table td {
+        /* 2. Make table elements behave like block elements */
+        display: block;
+        width: 100%;
+    }
+
+    .responsive-table tr {
+        /* 3. Style each row as a distinct "card" */
+        margin-bottom: 1rem;
+        border: 1px solid #dee2e6;
+        border-radius: 0.5rem;
+        overflow: hidden; /* Ensures the border-radius is respected */
+    }
+
+    .responsive-table td {
+        /* 4. Align text and add padding */
+        text-align: right; /* Align the data to the right */
+        padding-left: 50%; /* Reserve space on the left for the label */
+        position: relative;
+        border: none;
+        border-bottom: 1px solid #eee;
+    }
+
+        .responsive-table td:last-child {
+            border-bottom: 0;
+        }
+
+        .responsive-table td:before {
+            /* 5. This is the magic: create the label from the data-label attribute */
+            content: attr(data-label); /* Display the content of the data-label */
+            position: absolute;
+            left: 0;
+            width: 45%;
+            padding-left: 1rem;
+            font-weight: bold;
+            text-align: left; /* Align the label to the left */
+        }
+
+        /* Special handling for the checkbox cell */
+        .responsive-table td.checkbox-cell {
+            padding-left: 1rem; /* Remove the large padding */
+            text-align: left;
+        }
+
+            .responsive-table td.checkbox-cell:before {
+                display: none; /* The checkbox doesn't need a label */
+            }
+}

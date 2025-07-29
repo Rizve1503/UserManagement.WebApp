@@ -1,0 +1,129 @@
+﻿/* File: wwwroot/css/login.css - FINAL, ROBUST VERSION */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f2f5; /* Soft grey background for the whole page */
+}
+
+.auth-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+/* --- Left Panel: The Branded Art Panel --- */
+.auth-art-panel {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    color: white;
+    text-align: center;
+    clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+    background: linear-gradient(rgba(44, 82, 130, 0.85), rgba(90, 103, 216, 0.85)), url('../images/background-art.jpg');
+    background-size: cover;
+    background-position: center center;
+}
+
+    .auth-art-panel .logo {
+        max-width: 260px;
+        margin-bottom: 1.5rem;
+    }
+
+    .auth-art-panel h1 {
+        font-weight: 700;
+        font-size: clamp(2.5rem, 5vw, 3.25rem);
+    }
+
+    .auth-art-panel p {
+        font-size: clamp(1rem, 2.5vw, 1.15rem);
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+/* --- Right Panel: The Form --- */
+.auth-form-panel {
+    width: 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.auth-form-container {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 1rem; 
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+}
+
+    .auth-form-container h2 {
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .auth-form-container .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .auth-form-container label {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+
+    .auth-form-container .form-control {
+        border-radius: 0.5rem;
+        padding: 0.85rem 1rem;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+    }
+
+        .auth-form-container .form-control:focus {
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+            border-color: #3b82f6;
+        }
+
+    .auth-form-container .btn-primary {
+        background-color: #3b82f6;
+        border: none;
+        padding: 0.85rem;
+        font-weight: 500;
+        border-radius: 0.5rem;
+    }
+
+/* --- RESPONSIVENESS: Clean Stack --- */
+@media (max-width: 992px) {
+    .auth-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .auth-art-panel, .auth-form-panel {
+        width: 100%;
+        box-sizing: border-box;
+        clip-path: none; /* Remove the diagonal cut on mobile */
+    }
+
+    .auth-art-panel {
+        padding: 3rem 1.5rem;
+    }
+    
+    .auth-form-panel {
+        background-image: none;
+        background-color: #ffffff;
+    }
+
+    .auth-form-container {
+        box-shadow: none;
+    }
+}
