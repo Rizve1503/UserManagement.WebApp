@@ -6,7 +6,10 @@ UserNova is a full-stack web application built with ASP.NET Core MVC and SQL Ser
 The application features a polished, branded, and fully responsive user interface that works seamlessly on both desktop and mobile devices.
 
 ## Live Demo
+https://youtu.be/3SVJr1F0NeQ
 
+## Link to Deployed Project:
+http://usermanova-rizveahmad.somee.com/
 
 ## Features
 
